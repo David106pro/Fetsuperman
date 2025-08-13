@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="popup.css">
+    <script src="xlsx.full.min.js"></script>
+    <title>CMS批量修改工具</title>
+</head>
+<body>
+    <div id="app">
+        <h1>CMS批量修改工具</h1>
+        <div class="form-group">
+            <label for="project">选择项目:</label>
+            <select id="project">
+                <option value="jz">极智</option>
+                <option value="kn">金胡桃</option>
+            </select>
+        </div>
+        <button id="modify-cookie">修改Cookie</button>
+        <div class="form-group">
+            <label for="file-input">选择Excel文件:</label>
+            <input type="file" id="file-input" accept=".xlsx, .xls">
+            <button id="import-button">导入并执行</button>
+        </div>
+        <div class="progress-container">
+            <progress id="progress" value="0" max="100" style="width: 100%;"></progress>
+            <div id="status" class="status-text">状态信息</div>
+        </div>
+    </div>
+    <script src="popup.js"></script>
+</body>
+</html>

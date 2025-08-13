@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <style>
+        body { width: 400px; padding: 10px; }
+        .form-group { margin-bottom: 10px; }
+        input, select { width: 100%; margin-top: 4px; padding: 4px; }
+        textarea { 
+            width: 100%; 
+            margin-top: 4px; 
+            padding: 4px; 
+            height: 100px; 
+            resize: vertical;
+        }
+        .date-group { display: flex; gap: 10px; }
+        .date-group input { width: calc(50% - 5px); }
+        .note { 
+            color: #666; 
+            font-size: 12px; 
+            margin-bottom: 10px;
+            padding: 8px;
+            background: #f5f5f5;
+            border-radius: 4px;
+        }
+        .condition-group {
+            display: none;
+            margin-top: 10px;
+            padding: 10px;
+            background: #f9f9f9;
+            border-radius: 4px;
+        }
+        /* 强调数据来源选择框 */
+        #api_type {
+            background-color: #e8f0fe;
+            border: 2px solid #4285f4;
+            border-radius: 4px;
+            padding: 8px;
+            font-size: 14px;
+            font-weight: bold;
+        }
+        #api_type:focus {
+            outline: none;
+            box-shadow: 0 0 5px rgba(66, 133, 244, 0.5);
+        }
+        /* 时间范围组的容器 */
+        #time_range_group {
+            display: none;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="note">注意：每次最多导出1000条数据，请适当使用筛选条件。</div>
+    
+    <!-- 1. 数据来源 -->
+    <div class="form-group">
+        <label><strong>* 请选择数据来源</strong></label>
+        <select id="api_type">
+            <option value="">请选择...</option>
+            <option value="inject_cover">注入库-剧头</option>
+            <option value="inject_video">注入库-子集</option>
+            <option value="project_cover">项目库-专辑</option>
+            <option value="project_video">项目库-子集</option>
+            <option value="total_cover">总库-专辑</option>
+        </select>
+    </div>
+
+    <!-- 2. 合作伙伴（移到这里） -->
+    <div id="partner_group" class="form-group">
+        <label>合作伙伴</label>
+        <select id="partner_code">
+            <option value="bj">北京 (bj)</option>
+            <option value="fj">福建-华为 (fj)</option>
+            <option value="fj_cos">福建-易视腾 (fj_cos)</option>
+            <option value="jx">江西华为 (jx)</option>
+            <option value="jx_zx">江西中兴 (jx_zx)</option>
+            <option value="jx_cps">江西 (jx_cps)</option>
+            <option value="ha">河南 (ha)</option>
+            <option value="jz">极智 (jz)</option>
+            <option value="cq">重庆 (cq)</option>
+            <option value="kn">金胡桃 (kn)</option>
+            <option value="sn">陕西 (sn)</option>
+            <option value="gs_ott">甘肃-OTT (gs_ott)</option>
+            <option value="gs_iptv">甘肃-IPTV (gs_iptv)</option>
+            <option value="nx_mg">宁夏-咪咕 (nx_mg)</option>
+            <option value="nx">宁夏 (nx)</option>
+        </select>
+    </div>
+
+    <!-- 3. CID列表 -->
+    <div class="form-group">
+        <label>CID列表（每行一个，最多100个）</label>
+        <textarea id="cid_list" placeholder="请输入CID，每行一个"></textarea>
+    </div>
+
+    <div class="form-group">
+        <label>频道名称</label>
+        <select id="channel_name">
+            <option value="">全部</option>
+            <option value="电影">电影</option>
+            <option value="电视剧">电视剧</option>
+            <option value="少儿">少儿</option>
+            <option value="动漫">动漫</option>
+            <option value="综艺">综艺</option>
+            <option value="纪录片">纪录片</option>
+        </select>
+    </div>
+    <div id="time_range_group">
+        <div class="form-group">
+            <label>注入状态</label>
+            <select id="task_status">
+                <option value="">全部</option>
+                <option value="1">待注入</option>
+                <option value="4">注入中</option>
+                <option value="5">注入成功</option>
+                <option value="other">其它状态</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>上线状态</label>
+            <select id="is_online">
+                <option value="">全部</option>
+                <option value="1">上线</option>
+                <option value="0">下线</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>创建时间范围</label>
+            <div class="date-group">
+                <input type="date" id="c_start_time" />
+                <input type="date" id="c_end_time" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label>修改时间范围</label>
+            <div class="date-group">
+                <input type="date" id="m_start_time" />
+                <input type="date" id="m_end_time" />
+            </div>
+        </div>
+    </div>
+    <div id="total_cover_conditions" class="condition-group">
+        <div class="form-group">
+            <label>是否有效</label>
+            <select id="is_effective">
+                <option value="">全部</option>
+                <option value="1">有效</option>
+                <option value="0">无效</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>4M状态</label>
+            <select id="m4_status">
+                <option value="">全部</option>
+                <option value="1">有效</option>
+                <option value="0">无效</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>8M状态</label>
+            <select id="m8_status">
+                <option value="">全部</option>
+                <option value="1">有效</option>
+                <option value="0">无效</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>媒资完整性</label>
+            <select id="is_finished">
+                <option value="">全部</option>
+                <option value="0">无</option>
+                <option value="1">一般</option>
+                <option value="2">完整</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>介质批次号</label>
+            <select id="batch">
+                <option value="">全部</option>
+                <option value="240626">第一批(240626)</option>
+                <option value="240725">第二批(240725)</option>
+                <option value="240816">第三批(240816)</option>
+                <option value="240905">第四批(240905)</option>
+                <option value="241015">第五批(241015)</option>
+                <option value="241122">第六批(241122)</option>
+                <option value="241212">第七批(241212)</option>
+                <option value="240101">新片(240101)</option>
+            </select>
+        </div>
+    </div>
+    <div id="project_video_fields" class="condition-group">
+        <div class="form-group">
+            <label>额外字段选择</label>
+            <div style="margin-top: 8px;">
+                <label style="display: block; margin-bottom: 8px;">
+                    <input type="checkbox" id="field_inject_id"> 注入ID（series_id/program_id/movie_id）
+                </label>
+                <label style="display: block;">
+                    <input type="checkbox" id="field_inject_time"> 注入时间（发送/接收时间）
+                </label>
+            </div>
+        </div>
+    </div>
+    <button id="exportBtn">导出数据</button>
+    <div id="status"></div>
+
+    <script src="xlsx.full.min.js"></script>
+    <script src="popup.js"></script>
+</body>
+</html> 

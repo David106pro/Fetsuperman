@@ -1,0 +1,19 @@
+{
+  "manifest_version": 3,
+  "name": "Excel 比对工具",
+  "description": "比对两个Excel文件并标记匹配项",
+  "version": "1.0",
+  "permissions": [
+    "storage"
+  ],
+  "action": {
+    "default_popup": "popup.html"
+  },
+  "web_accessible_resources": [{
+    "resources": ["exceljs.min.js"],
+    "matches": ["<all_urls>"]
+  }],
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self'"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "manifest_version": 3,
+  "name": "影片数据导出工具",
+  "version": "1.0",
+  "description": "导出影片数据到Excel",
+  "permissions": [
+    "activeTab",
+    "http://cms.enjoy-tv.cn/*",
+    "https://cms.enjoy-tv.cn/*"
+  ],
+  "host_permissions": [
+    "http://cms.enjoy-tv.cn/*",
+    "https://cms.enjoy-tv.cn/*"
+  ],
+  "action": {
+    "default_popup": "popup.html"
+  }
+} 

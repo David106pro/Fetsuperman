@@ -1,0 +1,5 @@
+# 海报爬取下载器 - 项目日志
+项目创建时间: 2025-07-22 16:24:42
+Python版本: 3.12.0 (tags/v3.12.0:0fb18b0, Oct  2 2023, 13:03:39) [MSC v.1935 64 bit (AMD64)]
+依赖包: customtkinter, requests, pillow, pandas, openpyxl, beautifulsoup4, lxml, urllib3
+

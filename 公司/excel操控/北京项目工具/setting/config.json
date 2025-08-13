@@ -1,0 +1,10 @@
+{
+  "总表路径": "C:\\Users\\fucha\\Desktop\\【北京OTT总表】提审&发上线总表.xlsx",
+  "专辑注入路径": "C:\\Users\\fucha\\Desktop\\北京项目\\北京专辑注入.csv",
+  "剧集注入路径": "C:\\Users\\fucha\\Desktop\\北京项目\\北京子集注入.csv",
+  "审核表路径": "C:\\Users\\fucha\\Desktop\\北京项目\\3、审核结果",
+  "送审表输出路径": "C:\\Users\\fucha\\Desktop\\北京项目\\1、送审",
+  "上线表输出路径": "C:\\Users\\fucha\\Desktop\\北京项目\\2、上线",
+  "是否备份总表": false,
+  "审核状态格式统一": false
+}

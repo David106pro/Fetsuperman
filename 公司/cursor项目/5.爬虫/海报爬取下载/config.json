@@ -1,0 +1,23 @@
+{
+    "default_platform": "优酷视频",
+    "default_precise": false,
+    "default_download_type": "全部",
+    "default_path": "C:\\Users\\fucha\\Desktop",
+    "default_poster_size": "基础尺寸",
+    "default_vertical_size": "412x600",
+    "default_horizontal_size": "528x296",
+    "filename_format": "{标题}_{类型}",
+    "batch_search_priority": [
+        "优酷视频-精确搜索",
+        "爱奇艺-精确搜索",
+        "爱奇艺-普通搜索"
+    ],
+    "batch_horizontal_path": "D:\\海报需求\\第十一批\\横图",
+    "batch_vertical_path": "D:\\海报需求\\第十一批\\竖图",
+    "batch_default_size": "基础尺寸",
+    "batch_default_vertical_size": "412x600",
+    "batch_default_horizontal_size": "528x296",
+    "iqiyi_cookie": "",
+    "tencent_cookie": "",
+    "youku_cookie": ""
+}
