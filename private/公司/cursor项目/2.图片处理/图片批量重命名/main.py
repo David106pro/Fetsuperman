@@ -32,8 +32,14 @@ class ImageRenamer:
         self.original_column = ""
         self.rename_column = ""
         
+        # 默认图片文件夹路径
+        self.default_image_folder = r"D:\物料转接\海报\重庆图片\重庆海报"
+        
         # 创建UI界面
         self.create_ui()
+        
+        # 设置默认图片文件夹路径
+        self.set_default_image_folder()
         
         # 自动选择桌面最后修改的Excel文件
         self.auto_select_excel()
@@ -121,6 +127,32 @@ class ImageRenamer:
         
         # 配置主框架行权重
         main_frame.rowconfigure(4, weight=1)
+    
+    def set_default_image_folder(self):
+        """设置默认图片文件夹路径"""
+        if os.path.exists(self.default_image_folder):
+            self.image_folder_var.set(self.default_image_folder)
+            self.image_folder_path = self.default_image_folder
+            self.status_var.set(f"已设置默认图片文件夹: {self.default_image_folder}")
+        else:
+            print(f"默认图片文件夹不存在: {self.default_image_folder}")
+    
+    def process_rename_id(self, rename_id):
+        """处理重命名列ID长度，确保不超过14位"""
+        try:
+            # 移除所有空格和特殊字符
+            clean_id = str(rename_id).strip()
+            
+            # 如果ID长度超过14位，取前14位
+            if len(clean_id) > 14:
+                processed_id = clean_id[:14]
+                print(f"ID长度超过14位，已截取前14位: {clean_id} -> {processed_id}")
+                return processed_id
+            else:
+                return clean_id
+        except Exception as e:
+            print(f"处理重命名ID时出错: {str(e)}")
+            return str(rename_id)
     
     def auto_select_excel(self):
         """自动选择桌面最后修改的Excel文件"""
@@ -396,7 +428,9 @@ class ImageRenamer:
                 original_name = str(row[original_col]).strip()
                 new_name = str(row[rename_col]).strip()
                 if original_name != 'nan' and new_name != 'nan':
-                    rename_map[original_name] = new_name
+                    # 处理重命名列ID长度，确保不超过14位
+                    processed_new_name = self.process_rename_id(new_name)
+                    rename_map[original_name] = processed_new_name
             
             total_items = len(rename_map)
             processed_count = 0
